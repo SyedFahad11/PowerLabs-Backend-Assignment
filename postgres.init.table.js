@@ -1,5 +1,5 @@
 const fs = require('fs');
-const db = require('./postgres.pool.init');
+const db = require('./postgres.init.pool');
 
 
 

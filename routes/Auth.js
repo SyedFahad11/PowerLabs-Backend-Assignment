@@ -1,5 +1,5 @@
 const express = require("express");
-const db=require('../postgres.pool.init');
+const db=require('../postgres.init.pool');
 var jwt = require('jsonwebtoken');
 
 const router = express.Router();

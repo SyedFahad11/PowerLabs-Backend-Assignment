@@ -1,5 +1,5 @@
 const express = require("express");
-const db=require('../postgres.pool.init');
+const db=require('../postgres.init.pool');
 const fetchUser=require('../middleware/fetchUser');
 
 const router = express.Router();
@@ -76,7 +76,7 @@ router.get('/assignments', async (req, res) => {
     let queryText = 'SELECT * FROM assignments WHERE 1=1';
 
     if (due_date)
-      queryText += ` AND due_date >= '${due_date}'`;
+      queryText += ` AND due_date <= '${due_date}'`;
 
     if (total_score)
       queryText += ` AND total_score >= ${total_score}`;

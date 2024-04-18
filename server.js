@@ -1,6 +1,6 @@
 const express = require('express');
-const db = require('./postgres.pool.init'); // Import the connection pool
-const SchemaInit=require('./postgres.tables.init');
+const db = require('./postgres.init.pool'); // Import the connection pool
+const SchemaInit=require('./postgres.init.table');
 const path = require('path');
 const bodyParser = require("body-parser")
 
