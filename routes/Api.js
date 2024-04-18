@@ -10,7 +10,6 @@ const router = express.Router();
 router.post('/assignments',fetchUser, async (req, res) => {
   try {
     const teacher_id=req.user.id;
-    console.log(teacher_id);
 
      const { title, description, due_date, total_score } = req.body;
 
@@ -59,7 +58,40 @@ router.post('/assignments/submit/:assignment_id', fetchUser, async (req, res) =>
 //------------------------------------------------------------------------------------
 
 router.get('/assignments', async (req, res) => {
+
+  function isValidDateFormat(dateString) {
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
+    return regex.test(dateString);
+  }
+
   try {
+
+    const { due_date, total_score, sort_by } = req.query;
+
+
+    if (due_date && !isValidDateFormat(due_date)) {
+      return res.status(400).json({ error: 'Invalid due_date format. Please provide the date in YYYY-MM-DD format.' });
+    }
+
+    let queryText = 'SELECT * FROM assignments WHERE 1=1';
+
+    if (due_date)
+      queryText += ` AND due_date >= '${due_date}'`;
+
+    if (total_score)
+      queryText += ` AND total_score >= ${total_score}`;
+
+
+    if (sort_by === 'due_date') {
+      queryText += ' ORDER BY due_date';
+    } else if (sort_by === 'total_score') {
+      queryText += ' ORDER BY total_score';
+    }
+
+    const { rows } = await db.query(queryText);
+
+    res.status(200).json(rows);
+
 
   } catch (error) {
     console.error('Error executing query:', error);
