@@ -2,10 +2,14 @@ const express = require('express');
 const db = require('./postgres.pool.init'); // Import the connection pool
 const SchemaInit=require('./postgres.tables.init');
 const path = require('path');
+const bodyParser = require("body-parser")
+
 
 
 
 const app = express();
+app.use(express.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 //SchemaInit();
 
