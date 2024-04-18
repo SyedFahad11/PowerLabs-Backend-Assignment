@@ -2,7 +2,7 @@
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL
 );
 
 -- Assignment Table
@@ -12,7 +12,7 @@ CREATE TABLE assignments (
     description TEXT,
     due_date TIMESTAMP NOT NULL,
     total_score INTEGER NOT NULL,
-    teacher_id INTEGER NOT NULL REFERENCES users(user_id),
+    teacher_id INTEGER NOT NULL REFERENCES users(user_id)
 );
 
 -- Submission Table

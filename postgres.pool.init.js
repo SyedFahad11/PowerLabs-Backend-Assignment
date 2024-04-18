@@ -22,6 +22,7 @@ client.query('select * from users',(err,res)=>{
 
 const { Pool } = require('pg');
 
+
 // Create a new pool instance
 const pool = new Pool(
   {
@@ -32,6 +33,9 @@ const pool = new Pool(
     database:"postgres"
   }
 );
+
+
+
 
 pool.on('error', (error) => {
   console.error('Error with PostgreSQL Pool:', error);

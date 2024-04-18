@@ -1,12 +1,15 @@
 const express = require('express');
 const db = require('./postgres.pool.init'); // Import the connection pool
+const SchemaInit=require('./postgres.tables.init');
 
 const app = express();
+
+//SchemaInit();
 
 // Example route to fetch assignments
 app.get('/assignments', async (req, res) => {
   try {
-    const { rows } = await db.query('SELECT * FROM users');
+    const { rows } = await db.query('SELECT * FROM assignments');
     res.json(rows);
 
   } catch (error) {
