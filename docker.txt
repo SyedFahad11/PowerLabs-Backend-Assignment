@@ -1,0 +1,3 @@
+docker run -d --name postgres-container --network my-network -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1221 -e POSTGRES_DB=backendCRUD -v $(pwd)/init.sql:/docker-entrypoint-initdb.d/init.sql postgres:latest
+
+docker run -d --name app-container --network my-network -p 3000:3000 backend-app

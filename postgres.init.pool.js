@@ -5,12 +5,12 @@ const { Pool } = require('pg');
 const pool = new Pool(
   {
 
-    host:'db',
+    host:'postgres',
     port:5432,
     user:'postgres',
     password:'1221',
     database:'backendCRUD'
-    
+
   }
 );
 
