@@ -1,3 +1,16 @@
+docker build -t app -f Dockerfile.app .
+docker build -t pgdb -f Dockerfile.pg .
+docker create network powerplay
+docker create volume pgpowerplay
+docker run -p 3000:3000 --network powerplay --name backend app
+docker run --network powerplay --name pgdb --volume pgpowerplay:/var/lib/postgresql/data pgdb
+
+In the above script --name of the pg container must be same as host name
+
+Older methods:
+To run a container without building image, we are passing env variables in the command itself along with the location of init.sql file
+
 docker run -d --name postgres-container --network my-network -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=1221 -e POSTGRES_DB=backendCRUD -v $(pwd)/init.sql:/docker-entrypoint-initdb.d/init.sql postgres:latest
+
 
 docker run -d --name app-container --network my-network -p 3000:3000 backend-app
